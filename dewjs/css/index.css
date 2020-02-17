@@ -2,3 +2,12 @@
     --code-theme-background: #272822;
     --code-theme-text: #f8f8f2;
 }
+
+.cover:before {
+    content: none;
+}
+
+.cover h1 {
+    color: #3587da;
+    font-weight: bold;
+}
