@@ -1,0 +1,27 @@
+body {
+    font-family: Arial, Helvetica, sans-serif
+}
+
+h1 {
+    text-align: center;
+}
+
+.project {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background: #ececec;
+    border-radius: 5px;
+}
+
+.project .title {
+    font-size: 25px;
+    margin: 0;
+    margin-right: 10px;
+}
+
+.project .link {
+    font-weight: bold;
+    font-size: 20px;
+    margin-right: 10px;
+}
