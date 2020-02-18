@@ -10,6 +10,6 @@
 ![](https://badgen.net/github/issues/ewclide/dewjs?color=orange)
 
 [GitHub](https://github.com/ewclide/dewjs)
-[Get Started](#dewjs)
+[Get Started](#wellcome)
 
 ![color](#ffffff)

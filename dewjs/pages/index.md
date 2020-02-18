@@ -1,4 +1,4 @@
-# Dew.js
+# Wellcome
 
 > This is experimental javaScript library
 
