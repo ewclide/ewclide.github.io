@@ -134,27 +134,29 @@ const markdownRenderer = ((messegaDecorators = {}) => {
         return `<a ${stringifyAttributes(attrs)} rel="noopener">${prepareMessage(message)}</a>`;
     }
 
-    const shellStartReg = /^\s*\{((?:\w|-|,|=)+)?\:/;
+    const shellStartReg = /\s*\{((?:\w|-|,|=)+)?\:/g;
     const shellEndReg = /^\s*((?:\}|\n)+)\s*$/;
 
     const text = (message) => {
+        console.log(message)
         const shellStart = shellStartReg.test(message);
         const shellEnd = shellEndReg.test(message);
 
         if (!shellStart && !shellEnd) return message;
 
         let result = '';
+        let shell;
 
-        if (start) {
-            let shell;
-            while (shell = shellStartReg.exec(message)) {
-                const [, attrs_ = ''] = shell;
-                const attrs = prepareAttrs(attrs_);
+        if (shellStart) {
+            shellStartReg.lastIndex = 0;
+            while ((shell = shellStartReg.exec(message)) !== null) {
+                const [, rawAttrs = ''] = shell;
+                const attrs = prepareAttrs(rawAttrs);
                 result += `<div ${stringifyAttributes(attrs)}>`;
             }
         }
 
-        else {
+        if (shellEnd) {
             const [, ends] = shellEndReg.exec(message);
             for (let i = 0; i < ends.length; i++) {
                 if (ends[i] === '\n') continue;

@@ -1,11 +1,10 @@
-.blob-btn {
+a.blob-btn {
     z-index: 1;
     position: relative;
-    padding: 20px 46px;
+    padding: 14px 45px;
     margin-bottom: 30px;
     text-align: center;
-    text-transform: uppercase;
-    color: #0fe0f5;
+    color: #55dceb;
     font-size: 16px;
     font-weight: bold;
     background-color: transparent;
@@ -24,7 +23,8 @@
     top: 0;
     width: 100%;
     height: 100%;
-    border: 6px solid #0fe0f5;
+    border: 4px solid #55dceb;
+    border-radius: 50px;
 }
 
 .blob-btn:after {
@@ -35,17 +35,19 @@
     top: 9px;
     width: 100%;
     height: 100%;
-    border: 6px solid #222;
+    border: 4px solid #2b3e50;
+    border-radius: 50px;
     -webkit-transition: all 0.3s 0.2s;
     transition: all 0.3s 0.2s;
 }
 
-.blob-btn:hover {
-    color: #222;
+a.blob-btn:hover {
+    color: white;
 }
 
 .blob-btn:hover:after {
     -webkit-transition: all 0.3s;
+    opacity: 0;
     transition: all 0.3s;
     left: 0;
     top: 0;
@@ -59,6 +61,7 @@
     top: 0;
     width: 100%;
     height: 100%;
+    border-radius: 50px;
 }
 
 .blob-btn__blobs {
@@ -74,7 +77,7 @@
     top: 6px;
     width: 25%;
     height: 100%;
-    background: #0fe0f5;
+    background: #55dceb;
     border-radius: 100%;
     -webkit-transform: translate3d(0, 150%, 0) scale(1.7);
     transform: translate3d(0, 150%, 0) scale(1.7);

@@ -31,6 +31,8 @@
     --cover-button-primary-background: #37a5da;
     --cover-heading-font-size-max: 100;
     --cover-heading-font-size-min: 100;
+    /* --cover-link-color: white; */
+    --cover-link-text-decoration: none;
 
     /* sidebar */
     --sidebar-toggle-offset-left: 10px;
