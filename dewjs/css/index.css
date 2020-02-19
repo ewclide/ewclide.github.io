@@ -30,10 +30,11 @@
     --cover-button-primary-border: 2px solid #37a5da;
     --cover-button-primary-background: #37a5da;
     --cover-heading-font-size-max: 100;
+    --cover-heading-font-size-min: 100;
 
     /* sidebar */
-    --sidebar-toggle-offset-left: 20px;
-    --sidebar-toggle-offset-top: 20px;
+    --sidebar-toggle-offset-left: 10px;
+    --sidebar-toggle-offset-top: 10px;
     --sidebar-toggle-background: none;
     --sidebar-toggle-icon-stroke-width: 3px;
     --sidebar-toggle-icon-height: 12px;
@@ -51,7 +52,7 @@ main {
     border-top: 1px solid #e3e3e3;
 }
 
-h1 ext {
+h1 b {
     font-size: 70px;
     color: #37a5da;
 }
@@ -107,4 +108,19 @@ h1 ext {
     height: 1px;
     width: 15px;
     border-top: 1px dashed #b7b7b7;
+}
+
+@media (max-width: 768px) {
+    :root {
+        --cover-heading-font-size-max: 70;
+        --cover-heading-font-size-min: 70;
+    }
+
+    .cover h1 {
+        margin-top: 20px;
+    }
+
+    h1 b {
+        font-size: 50px;
+    }
 }

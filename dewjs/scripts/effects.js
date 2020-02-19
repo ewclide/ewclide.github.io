@@ -1,0 +1,1 @@
+styleSheetManager.remove('.cover .cover-main > p:last-child a:first-child', { once: false });

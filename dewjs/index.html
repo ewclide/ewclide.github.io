@@ -20,34 +20,15 @@
 	<!-- PrismJS theme -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/themes/prism-okaidia.min.css" />
 	<link rel="stylesheet" href="./css/index.css" />
+	<link rel="stylesheet" href="./css/effects.css" />
 </head>
 <body>
 	<div id="app"></div>
-	<script>
-		window.$docsify = {
-			name: 'Dew.js',
-			logo: './images/logo-inline.svg',
-			repo: 'https://github.com/ewclide/dewjs',
-			homepage: 'pages/index.md',
-			coverpage: 'pages/cover.md',
-			loadSidebar: 'pages/sidebar.md',
-			auto2top: true,
-			maxLevel: 3,
-			subMaxLevel: 3,
+	<script src="./scripts/decorators.js"></script>
+	<script src="./scripts/common.js"></script>
+	<script src="./scripts/effects.js"></script>
+	<script src="./scripts/docsify-config.js"></script>
 
-			/* plugins */
-			executeScript: true,
-			// disqus: 'dewjs',
-			search: {
-				depth: 3,
-				noData: 'nothing',
-				placeholder: 'Search...'
-			}
-		}
-	</script>
-	<div class="btn-cont">
-		<button class="btn btn-4">test</button>
-	</div>
 	<!-- <script src="//unpkg.com/docsify/lib/plugins/disqus.min.js"></script> -->
 	<script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
 	<script src="//unpkg.com/docsify/lib/plugins/emoji.min.js"></script>
