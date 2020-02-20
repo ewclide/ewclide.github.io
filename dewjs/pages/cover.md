@@ -9,11 +9,11 @@
 ![](https://badgen.net/github/commits/ewclide/dewjs?color=purple)
 ![](https://badgen.net/github/issues/ewclide/dewjs?color=orange)
 
-{class=btns:
-    {class=btns-wrap:
-        [@blobButton(GitHub)](https://github.com/ewclide/dewjs "class=brk-btn")
-        [@blobButton(Get Started)](#wellcome "class=brk-btn")
-    }
-}
+{div:class=btns}
+    {div:class=btns-wrap}
+        [@simpleButton(GitHub)](https://github.com/ewclide/dewjs "class=btn-swing solid")
+        [@arrowButton(Get Started)](#wellcome "class=btn-arrow")
+    {/div}
+{/div}
 
 ![color](#ffffff)

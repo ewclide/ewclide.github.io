@@ -13,7 +13,7 @@
     "url": "git+https://github.com/ewclide/ewclide.github.io.git"
   },
   "scripts": {
-    "start-dewjs": "npx docsify serve dewjs"
+    "dewjs": "npx docsify serve dewjs"
   },
   "devDependencies": {
     "docsify-cli": "^4.4.0"

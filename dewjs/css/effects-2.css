@@ -1,16 +1,4 @@
-.btns {
-    display: flex;
-    justify-content: center;
-}
-
-.btns-wrap {
-    display: flex;
-    justify-content: space-between;
-    flex-grow: 1;
-    max-width: 350px;
-}
-
-a.brk-btn {
+a.btn {
     position: relative;
     background: none;
     color: #15def5;
@@ -22,12 +10,12 @@ a.brk-btn {
     padding: 12px 45px;
 }
 
-a.brk-btn:hover {
+a.btn:hover {
     border: 0.2em solid #15def5;
     color: #15def5;
 }
 
-.brk-btn::before {
+.btn::before {
     content: "";
     display: block;
     position: absolute;
@@ -41,7 +29,7 @@ a.brk-btn:hover {
     transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
 }
 
-.brk-btn::after {
+.btn::after {
     content: "";
     display: block;
     position: absolute;
@@ -55,10 +43,10 @@ a.brk-btn:hover {
     transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
 }
 
-.brk-btn:hover::before {
+.btn:hover::before {
     right: 75%;
 }
 
-.brk-btn:hover::after {
+.btn:hover::after {
     left: 75%;
 }

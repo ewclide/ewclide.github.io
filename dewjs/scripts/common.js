@@ -4,11 +4,11 @@ function trimQuots(value) {
 }
 
 const styleSheetManager = (() => {
-    let prepared = false;
+    let isInline = false;
 
-    const _prepareSheets = async () => {
-        if (prepared) return;
-        prepared = true;
+    const _makeInlineStyleSheets = async () => {
+        if (isInline) return;
+        isInline = true;
 
         const head = document.getElementsByTagName('head')[0];
         const { styleSheets } = document;
@@ -32,9 +32,19 @@ const styleSheetManager = (() => {
         }
     }
 
-    const _findRuleIndices = (styleSheet, selector, { once = true, whole = false }) => {
+    const _findRuleIndices = (styleSheet, selectors, options, indices = []) => {
+        if (Array.isArray(selectors)) {
+            let result = [];
+            for (const selector of selectors) {
+                _findRuleIndices(styleSheet, selector, options, result);
+            }
+
+            return result;
+        }
+
+        const { once = true, whole = false } = options;
         const { cssRules } = styleSheet;
-        const indices = [];
+        let selector = selectors;
         let index = -1;
 
         for (const { selectorText } of cssRules) {
@@ -49,7 +59,7 @@ const styleSheetManager = (() => {
             if (once) break;
         }
 
-        return indices;
+        return indices.sort((p, n) => n - p);
     }
 
     const _removeByIndices = (styleSheet, indices) => {
@@ -59,46 +69,31 @@ const styleSheetManager = (() => {
         }
     }
 
-    const _remove = (selector, options) => {
+    const remove = async (selectors, options = {}) => {
+        await _makeInlineStyleSheets();
+
         const { styleSheets } = document;
         let indices;
 
         for (const styleSheet of styleSheets) {
-            indices = _findRuleIndices(styleSheet, selector, options);
+            indices = _findRuleIndices(styleSheet, selectors, options);
             _removeByIndices(styleSheet, indices);
         }
     }
 
-    const remove = async (selectors, options = {}) => {
-        await _prepareSheets();
+    const rename = async () => {
+        await _makeInlineStyleSheets();
 
-        const selectorsList = [].concat(selectors);
-        for (const selector of selectorsList) {
-            _remove(selector, options);
-        }
+        // code ...
     }
 
-    return {
-        remove
-    }
+    return { remove, rename }
 })();
 
 const markdownRenderer = ((messegaDecorators = {}) => {
-    const prepareMessage = (rawMessage) => {
-        const found = /^@(\w+)\((.+?)\)$/.exec(rawMessage);
-        if (!found) return rawMessage;
-
-        const [, decoratorName, message] = found;
-        const decorator = messegaDecorators[decoratorName];
-        if (!decorator) {
-            console.error(`Couldn't find decorator "${decoratorName}"`);
-            return message;
-        }
-
-        return decorator(message);
-    }
-
     const attrRegexp = /=/;
+    const hrefRegexp = /(docsify:)?(.+)/;
+    const callOriginal = (name, ...args) => window.$docsify.markdown.renderer.origin[name](...args);
     const stringifyAttribute = ({ name, value }) => typeof value === 'boolean' ? name : `${name}="${value}"`;
     const stringifyAttributes = (attrs) => attrs.map(stringifyAttribute).join(' ');
     const isAnchor = (href) => href[0] === '#';
@@ -115,7 +110,26 @@ const markdownRenderer = ((messegaDecorators = {}) => {
         return result;
     }
 
-    const link = (href, caption, message) => {
+    const prepareMessage = (rawMessage) => {
+        const found = /^@(\w+)\((.+?)\)$/.exec(rawMessage);
+        if (!found) return rawMessage;
+
+        const [, decoratorName, message] = found;
+        const decorator = messegaDecorators[decoratorName];
+        if (!decorator) {
+            console.error(`Couldn't find decorator "${decoratorName}"`);
+            return message;
+        }
+
+        return decorator(message);
+    }
+
+    const link = (inputHref, caption, message) => {
+        const [, docsify, href] = hrefRegexp.exec(inputHref);
+        if (docsify) {
+            return callOriginal('link', href, caption, message);
+        }
+
         const isAttrs = attrRegexp.test(caption);
         const attrs = [
             { name: 'href', value: prepareHref(href) }
@@ -134,34 +148,35 @@ const markdownRenderer = ((messegaDecorators = {}) => {
         return `<a ${stringifyAttributes(attrs)} rel="noopener">${prepareMessage(message)}</a>`;
     }
 
-    const shellStartReg = /\s*\{((?:\w|-|,|=)+)?\:/g;
-    const shellEndReg = /^\s*((?:\}|\n)+)\s*$/;
+    const shellStartReg = /\s*\{(\w+\:)?((?:\w|-|,|=)+)?\}/g;
+    const shellEndReg = /\s*\{\/(\w+)?\}/g;
+    const whileExec = (regexp, message, handler) => {
+        regexp.lastIndex = 0;
+        while ((found = regexp.exec(message)) !== null) {
+            handler(found.slice(1));
+        }
+    }
 
     const text = (message) => {
-        console.log(message)
         const shellStart = shellStartReg.test(message);
         const shellEnd = shellEndReg.test(message);
 
         if (!shellStart && !shellEnd) return message;
 
         let result = '';
-        let shell;
-
         if (shellStart) {
-            shellStartReg.lastIndex = 0;
-            while ((shell = shellStartReg.exec(message)) !== null) {
-                const [, rawAttrs = ''] = shell;
+            whileExec(shellStartReg, message, (shell) => {
+                const [tag = 'div:', rawAttrs = ''] = shell;
                 const attrs = prepareAttrs(rawAttrs);
-                result += `<div ${stringifyAttributes(attrs)}>`;
-            }
+                result += `<${tag.slice(0, -1)} ${stringifyAttributes(attrs)}>`;
+            });
         }
 
         if (shellEnd) {
-            const [, ends] = shellEndReg.exec(message);
-            for (let i = 0; i < ends.length; i++) {
-                if (ends[i] === '\n') continue;
-                result += '</div>';
-            }
+            whileExec(shellEndReg, message, (shell) => {
+                const [tag = 'div'] = shell;
+                result += `</${tag}>`;
+            });
         }
 
         return result;

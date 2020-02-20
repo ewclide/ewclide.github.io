@@ -80,6 +80,10 @@ h1 b {
     color: #6a8bad;
 }
 
+.cover .cover-main {
+    max-width: 100%;
+}
+
 .content code:not([class*="lang-"]):not([class*="language-"]) {
     border: 1px solid #e4e4e4;
 }
@@ -110,6 +114,18 @@ h1 b {
     height: 1px;
     width: 15px;
     border-top: 1px dashed #b7b7b7;
+}
+
+.btns {
+    display: flex;
+    justify-content: center;
+}
+
+.btns-wrap {
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 1;
+    max-width: 450px;
 }
 
 @media (max-width: 768px) {
