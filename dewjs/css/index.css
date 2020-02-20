@@ -116,22 +116,43 @@ h1 b {
     border-top: 1px dashed #b7b7b7;
 }
 
+.btns-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
 .btns {
     display: flex;
     justify-content: center;
 }
 
-.btns-wrap {
+.btns a:first-child {
+    margin-right: 25px;
+}
+
+.igh > span {
     display: flex;
-    justify-content: space-between;
-    flex-grow: 1;
-    max-width: 450px;
+    direction: row;
+    align-items: center;
+}
+
+.igh > span::before {
+    content: '';
+    height: 30px;
+    width: 30px;
+    display: block;
+    background: url('../images/github-logo.svg') no-repeat center;
+    background-size: 100%;
+    margin-right: 10px;
 }
 
 @media (max-width: 768px) {
     :root {
         --cover-heading-font-size-max: 70;
         --cover-heading-font-size-min: 70;
+        --sidebar-toggle-offset-left: 5px;
+        --sidebar-toggle-offset-top: 25px;
     }
 
     .cover h1 {
@@ -140,5 +161,19 @@ h1 b {
 
     h1 b {
         font-size: 50px;
+    }
+
+    .btns {
+        max-width: 220px;
+        flex-direction: column;
+    }
+
+    .btns a {
+        width: 100%;
+    }
+
+    .btns a:first-child {
+        margin-right: 0;
+        margin-bottom: 20px;
     }
 }

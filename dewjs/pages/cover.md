@@ -9,9 +9,9 @@
 ![](https://badgen.net/github/commits/ewclide/dewjs?color=purple)
 ![](https://badgen.net/github/issues/ewclide/dewjs?color=orange)
 
-{div:class=btns}
-    {div:class=btns-wrap}
-        [@simpleButton(GitHub)](https://github.com/ewclide/dewjs "class=btn-swing solid")
+{div:class=btns-wrap}
+    {div:class=btns}
+        [@simpleButton(GitHub)](https://github.com/ewclide/dewjs "class=btn-swing solid igh")
         [@arrowButton(Get Started)](#wellcome "class=btn-arrow")
     {/div}
 {/div}
