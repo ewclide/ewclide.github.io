@@ -1,4 +1,4 @@
-import{n as mt,u as K,a as dt,d as T,k as ht,m as pt,o as X,w as gt,g as N}from"./index-9it5vQZx.js";const C=Object.create(null),Y=Object.create(null);function W(o,t){let e=Y[o];return e===void 0&&(C[t]===void 0&&(C[t]=1),Y[o]=e=C[t]++),e}let G;function xt(){if(!G){G="mediump";const o=mt();o&&o.getShaderPrecisionFormat&&(G=o.getShaderPrecisionFormat(o.FRAGMENT_SHADER,o.HIGH_FLOAT).precision?"highp":"mediump")}return G}function vt(o,t,e){return t?o:e?(o=o.replace("out vec4 finalColor;",""),`
+import{n as mt,u as K,a as dt,d as T,k as ht,m as pt,o as X,w as gt,g as N}from"./index-CveAYrnx.js";const C=Object.create(null),Y=Object.create(null);function W(o,t){let e=Y[o];return e===void 0&&(C[t]===void 0&&(C[t]=1),Y[o]=e=C[t]++),e}let G;function xt(){if(!G){G="mediump";const o=mt();o&&o.getShaderPrecisionFormat&&(G=o.getShaderPrecisionFormat(o.FRAGMENT_SHADER,o.HIGH_FLOAT).precision?"highp":"mediump")}return G}function vt(o,t,e){return t?o:e?(o=o.replace("out vec4 finalColor;",""),`
         
         #ifdef GL_ES // This checks if it is WebGL1
         #define in varying
